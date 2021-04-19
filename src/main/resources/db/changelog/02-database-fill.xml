@@ -1,0 +1,84 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="v4ndr (generated)" id="1596570119369-1">
+        <insert tableName="show">
+            <column name="item_id" valueNumeric="15"/>
+            <column name="abstract" value="Három esztendővel azután, hogy Gotham maszkos igazságosztója eltűnt, Bruce Wayne unokatestvére, Kate Kane visszatér a városba, Hogy legyőzze démonait, magára ölti Batwoman álcáját, és Batman nyomdokaiba lépve szembeszáll a bűnözőkkel."/>
+            <column name="age_rating" valueNumeric="12"/>
+            <column name="availability_from_utc_iso" valueDate="2019-12-21T23:00:00"/>
+            <column name="background_url" value="https://m.media-amazon.com/images/M/MV5BNWE4MGVhZjUtMjEwNy00NzJlLWE3ZmEtNWMyYmFlZmUzZTA0XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg"/>
+            <column name="cast" value="Ruby Rose, Rachel Skarsten, Meagan Tandy, Camrus Johnson, Nicole Kang"/>
+            <column name="category" value="SERIES"/>
+            <column name="director" value="Marcos Siega"/>
+            <column name="edited_abstract" value="Három esztendővel azután, hogy Gotham maszkos igazságosztója eltűnt, Bruce Wayne unokatestvére, Kate Kane visszatér a városba, Hogy legyőzze démonait, magára ölti Batwoman álcáját, és Batman nyomdokaiba lépve szembeszáll a bűnözőkkel."/>
+            <column name="genre" value="akció"/>
+            <column name="id" value="tt8712204"/>
+            <column name="name" value="Batwoman"/>
+            <column name="production_year" valueNumeric="2019"/>
+            <column name="seasons" valueNumeric="3"/>
+        </insert>
+        <insert tableName="show">
+            <column name="item_id" valueNumeric="16"/>
+            <column name="abstract" value="A sportkörnyezetben játszódó afroamerikai tinidráma Spencer Paysinger amerikai futballjátékos igaz történetét meséli el. A Los Angeles egyik gettónegyedében élő Spencer a gazdag Beverly Hills középiskola csapatához igazol."/>
+            <column name="age_rating" valueNumeric="12"/>
+            <column name="availability_from_utc_iso" valueDate="2018-10-11T07:00:00"/>
+            <column name="background_url" value="https://m.media-amazon.com/images/M/MV5BMzBiMTE0NmQtZTM5Yi00ZDZhLWE2MDQtMzU2ZmIxYmQ4ZmFjXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg"/>
+            <column name="cast" value="Daniel Ezra, Greta Onieogou, Samantha Logan, Michael Evans Behling, Taye Diggs"/>
+            <column name="category" value="SERIES"/>
+            <column name="director" value="Rob Hardy"/>
+            <column name="edited_abstract" value="A sportkörnyezetben játszódó afroamerikai tinidráma Spencer Paysinger amerikai futballjátékos igaz történetét meséli el. A Los Angeles egyik gettónegyedében élő Spencer a gazdag Beverly Hills középiskola csapatához igazol."/>
+            <column name="genre" value="dráma"/>
+            <column name="id" value="tt7414406"/>
+            <column name="name" value="Spencer"/>
+            <column name="production_year" valueNumeric="2018"/>
+            <column name="seasons" valueNumeric="4"/>
+        </insert>
+        <insert tableName="show">
+            <column name="item_id" valueNumeric="17"/>
+            <column name="abstract" value="A sorozat az amerikai pornóipar felemelkedését meséli el az 1970-es, 80-as években. A pornó legalizálása után a New York-i Time Square lesz a műfaj egyik fellegvára, ahol a pénz mellett megjelenik a prostitúció, drog, AIDS és a maffia is."/>
+            <column name="age_rating" valueNumeric="18"/>
+            <column name="availability_from_utc_iso" valueDate="2017-09-23T22:00:00"/>
+            <column name="background_url" value="https://m.media-amazon.com/images/M/MV5BOWEyM2U1MjctZTUzYy00MTMyLTkyNTgtNjQxNTc2ODk2OTJkXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SX300.jpg"/>
+            <column name="cast" value="James Franco, Maggie Gyllenhaal, Gary Carr, Margarita Levieva, Lawrence Gilliard Jr."/>
+            <column name="category" value="SERIES"/>
+            <column name="director" value="Michelle Maclaren"/>
+            <column name="edited_abstract" value="A sorozat az amerikai pornóipar felemelkedését meséli el az 1970-es, 80-as években. A pornó legalizálása után a New York-i Time Square lesz a műfaj egyik fellegvára, ahol a pénz mellett megjelenik a prostitúció, drog, AIDS és a maffia is."/>
+            <column name="genre" value="dráma"/>
+            <column name="id" value="tt4998350"/>
+            <column name="name" value="Fülledt utcák"/>
+            <column name="production_year" valueNumeric="2017"/>
+            <column name="seasons" valueNumeric="3"/>
+        </insert>
+        <insert tableName="show">
+            <column name="item_id" valueNumeric="18"/>
+            <column name="abstract" value="A széria a világsikert arató Vámpírnaplók és A sötétség kora című vámpíros sorozatok folytatását meséli el, egy új természetfölötti képességekkel rendelkező generáció történetét, a középpontban Klaus Mikkelson 17 éves lányával, Hope-pal."/>
+            <column name="age_rating" valueNumeric="15"/>
+            <column name="availability_from_utc_iso" valueDate="2018-10-26T07:00:00"/>
+            <column name="background_url" value="https://m.media-amazon.com/images/M/MV5BZmMwNDczMDUtNDU0Mi00MjIyLWI1NTktNzM4Yzc1MTNmZDIxXkEyXkFqcGdeQXVyOTQ0NTEzMzk@._V1_SX300.jpg"/>
+            <column name="cast" value="Danielle Rose Russell, Matthew Davis, Jenny Boyd, Kaylee Bryant, Quincy Fouse"/>
+            <column name="category" value="SERIES"/>
+            <column name="director" value="Chris Grismer"/>
+            <column name="edited_abstract" value="A széria a világsikert arató Vámpírnaplók és A sötétség kora című vámpíros sorozatok folytatását meséli el, egy új természetfölötti képességekkel rendelkező generáció történetét, a középpontban Klaus Mikkelson 17 éves lányával, Hope-pal."/>
+            <column name="genre" value="dráma"/>
+            <column name="id" value="tt8103070"/>
+            <column name="name" value="Legacies - A sötétség öröksége"/>
+            <column name="production_year" valueNumeric="2018"/>
+            <column name="seasons" valueNumeric="4"/>
+        </insert>
+        <insert tableName="show">
+            <column name="item_id" valueNumeric="19"/>
+            <column name="abstract" value="Eszter a valóság elől a képregények világába menekül, csak az angol tanárát kedveli. Élete felfordul, amikor a tanár bejelenti, hogy külföldre megy dolgozni. Eszter különleges búcsú e-mailje után titkos távkapcsolat alakul ki közöttük."/>
+            <column name="age_rating" valueNumeric="12"/>
+            <column name="availability_from_utc_iso" valueDate="2019-06-05T22:00:00"/>
+            <column name="background_url" value="https://m.media-amazon.com/images/M/MV5BYTY1NWQ0YTItYWZmOC00N2Q1LWE0YjItYzNiZDFiZmJjYjYwXkEyXkFqcGdeQXVyMzI2OTY0NjA@._V1_SX300.jpg"/>
+            <column name="cast" value="Szilvia Herr, Kristóf Vajda, Csaba Polgár, Judit Rezes, Dávid Rácz"/>
+            <column name="category" value="MOVIE"/>
+            <column name="director" value="Mihály Schwechtje"/>
+            <column name="edited_abstract" value="Eszter a valóság elől a képregények világába menekül, csak az angol tanárát kedveli. Élete felfordul, amikor a tanár bejelenti, hogy külföldre megy dolgozni. Eszter különleges búcsú e-mailje után titkos távkapcsolat alakul ki közöttük."/>
+            <column name="genre" value="dráma"/>
+            <column name="id" value="tt8529512"/>
+            <column name="name" value="Remélem legközelebb sikerül meghalnod :)"/>
+            <column name="production_year" valueNumeric="2018"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

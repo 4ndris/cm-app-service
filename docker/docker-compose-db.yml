@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  postgres:
+    container_name: cm-app-postgres
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: cmapp_service
+      POSTGRES_USER: cmapp
+      POSTGRES_PASSWORD: cmapp
+    networks:
+      - cmnet
+    ports:
+      - $SERVICES_DB_PORT:5432
+
+networks:
+  cmnet:
+
+volumes:
+  postgres_data:
+    driver: local

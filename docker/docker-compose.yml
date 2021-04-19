@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  cm-app-service:
+    container_name: cm-app-service
+    image: snippet/cm-app-service
+    build:
+      context: ..
+      dockerfile: ./Dockerfile
+      args:
+        execution_env: $EXEC_ENV
+    networks:
+      - cmnet
+    ports:
+      - $SERVICES_PORT:8080
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: cm-app-postgres
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: cmapp_service
+      POSTGRES_USER: cmapp
+      POSTGRES_PASSWORD: cmapp
+    networks:
+      - cmnet
+    ports:
+      - $SERVICES_DB_PORT:5432
+
+networks:
+  cmnet:
+
+volumes:
+  postgres_data:
+    driver: local

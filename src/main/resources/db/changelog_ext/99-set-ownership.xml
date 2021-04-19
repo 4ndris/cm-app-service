@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="1" author="VereA">
+        <sql splitStatements="false">
+            CREATE OR REPLACE FUNCTION public.exec(text)
+            RETURNS text
+            LANGUAGE plpgsql
+            AS $function$
+            BEGIN
+            EXECUTE $1;
+            RETURN $1;
+            END;
+            $function$
+            ;
+
+            SELECT exec('ALTER TABLE ' || quote_ident(s.nspname) || '.' ||
+            quote_ident(s.relname) || ' OWNER TO cmapp')
+            FROM (SELECT nspname, relname
+            FROM pg_class c JOIN pg_namespace n ON (c.relnamespace = n.oid)
+            WHERE nspname NOT LIKE E'pg\\_%' AND
+            nspname != 'information_schema' AND
+            relkind IN ('r','S','v') ORDER BY relkind = 'S') s;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,41 @@
+---
+spring.profiles.active: local
+---
+spring:
+  application:
+    name: CM Services
+  profiles: generic
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        format_sql: true
+    hibernate:
+      ddl-auto: "none"
+    generate-ddl: false
+server:
+  port: 8080
+logging:
+  level:
+    hu.vereba: DEBUG
+    root: INFO
+---
+# ------------------------------------------=== LOCAL ===------------------------------------------
+spring.profiles.include:
+  - generic
+spring:
+  profiles: test
+  flyway:
+    enabled: false
+  liquibase:
+    enabled: true
+    change-log: "classpath:test-db/db-changelog-master.xml"
+    liquibase-schema: public
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    hu.vereba: DEBUG
+    root: INFO
+    liquibase: ERROR
+---
