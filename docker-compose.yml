@@ -10,14 +10,9 @@ services:
       POSTGRES_DB: cmapp_service
       POSTGRES_USER: cmapp
       POSTGRES_PASSWORD: cmapp
-    networks:
-      - cmnet
     ports:
-      - $SERVICES_DB_PORT:5432
-
-networks:
-  cmnet:
-
+      - 5432:5432
+      
 volumes:
   postgres_data:
     driver: local
