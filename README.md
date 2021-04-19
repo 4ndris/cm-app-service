@@ -20,6 +20,12 @@ After DB spin up:
 
 Run application: ```mvn spring-boot:run```
 
+### Gitpod
+
+Enable docker:
+run sudo docker-up in a Terminal
+run docker-compose up in another Terminal
+
 
 #### URLs
 
