@@ -48,8 +48,7 @@ public class Show implements Serializable {
     @NotNull
     private String cast;
     @JsonProperty("Category")
-    @NotNull
-    private String category;
+    private ShowType category;
     @JsonProperty("Director")
     @NotNull
     private String director;
@@ -145,17 +144,17 @@ public class Show implements Serializable {
         this.cast = cast;
     }
 
-    public Show category(String category) {
+    public Show category(ShowType category) {
         this.category = category;
         return this;
     }
 
     @ApiModelProperty(value = "Category of the show")
-    public String getCategory() {
+    public ShowType getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(ShowType category) {
         this.category = category;
     }
 

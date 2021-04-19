@@ -5,6 +5,7 @@ import hu.vereba.snippet.cm.database.entity.MovieEntity;
 import hu.vereba.snippet.cm.database.entity.SeriesEntity;
 import hu.vereba.snippet.cm.database.respository.ShowRepository;
 import hu.vereba.snippet.cm.exception.DuplicateShowIdException;
+import hu.vereba.snippet.cm.exception.InvalidCategoryException;
 import hu.vereba.snippet.cm.exception.ShowNotFoundException;
 import hu.vereba.snippet.cm.rest.model.Show;
 import org.modelmapper.ModelMapper;
@@ -46,35 +47,34 @@ public class ShowService {
         }
 
         switch (show.getCategory()) {
-            case "MOVIE":
+            case MOVIE:
                 MovieEntity movieEntity = modelMapper.map(show, MovieEntity.class);
                 showRepository.save(movieEntity);
                 break;
-            case "SERIES":
+            case SERIES:
                 SeriesEntity seriesEntity = modelMapper.map(show, SeriesEntity.class);
                 showRepository.save(seriesEntity);
                 break;
             default:
+                throw new InvalidCategoryException("Invalid category: " + show.getCategory());
         }
-
-
     }
 
     public Show getShow(String id) {
-        BaseShowEntity movieEntity = showRepository.findById(id).orElseThrow(() -> new ShowNotFoundException(id));
-        return modelMapper.map(movieEntity, Show.class);
+        BaseShowEntity showEntity = showRepository.findById(id).orElseThrow(() -> new ShowNotFoundException(id));
+        return modelMapper.map(showEntity, Show.class);
     }
 
     @Transactional
     public Show updateShow(String id, Show show) {
-        BaseShowEntity movieEntity = showRepository.findById(id).orElseThrow(() -> new ShowNotFoundException(id));
-        modelMapper.map(show, movieEntity);
-        return modelMapper.map(movieEntity, Show.class);
+        BaseShowEntity showEntity = showRepository.findById(id).orElseThrow(() -> new ShowNotFoundException(id));
+        modelMapper.map(show, showEntity);
+        return modelMapper.map(showEntity, Show.class);
     }
 
     @Transactional
     public void deleteShow(String id) {
-        BaseShowEntity movieEntity = showRepository.findById(id).orElseThrow(() -> new ShowNotFoundException(id));
-        showRepository.delete(movieEntity);
+        BaseShowEntity showEntity = showRepository.findById(id).orElseThrow(() -> new ShowNotFoundException(id));
+        showRepository.delete(showEntity);
     }
 }
