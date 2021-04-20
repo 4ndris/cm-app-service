@@ -8,10 +8,20 @@ ports:
 
 # List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/config-start-tasks/
 tasks:      
-  - name: application-startup
+#  - name: application-startup
+#    before: sudo docker-up
+#    init: mvn package -DskipTests
+#    command: java -jar target/*.jar
+
+  - name: docker-daemon
     before: sudo docker-up
-    init: mvn package -DskipTests
-    command: java -jar target/*.jar
+
+  - name: docker-container
+    before:
+      echo 'Waiting for docker daemon to start' &&
+      until docker info &> /dev/null; do sleep 1; done;
+    init:
+      mvn package -DskipTests
 
 vscode:
   extensions:
