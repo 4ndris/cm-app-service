@@ -24,6 +24,9 @@ tasks:
       docker-compose up
     
   - name: applicaion-start
+    before:
+        echo 'Waiting for docker daemon to start' &&
+        until docker info &> /dev/null; do sleep 1; done;
     init:
       mvn package -DskipTests
     command: 
