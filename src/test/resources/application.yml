@@ -38,4 +38,3 @@ logging:
     hu.vereba: DEBUG
     root: INFO
     liquibase: ERROR
----

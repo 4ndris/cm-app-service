@@ -75,4 +75,3 @@ logging:
   level:
     hu.vereba: INFO
     root: INFO
----
