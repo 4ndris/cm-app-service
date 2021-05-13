@@ -1,10 +1,6 @@
----
-spring.profiles.active: local
----
 spring:
   application:
     name: CM Services
-  profiles: generic
   jpa:
     show-sql: false
     properties:
@@ -14,6 +10,15 @@ spring:
     hibernate:
       ddl-auto: "none"
     generate-ddl: false
+  liquibase:
+    enabled: true
+    change-log: "classpath:db/db-changelog-master.xml"
+    user: "cmapp"
+    password: "cmapp"
+  datasource:
+    username: cmapp
+    password: cmapp
+    url: jdbc:postgresql://localhost:5432/cmapp_service
 server:
   port: 8080
 logging:
@@ -35,43 +40,3 @@ management:
     export:
       prometheus:
         enabled: true
----
-# ------------------------------------------=== LOCAL ===------------------------------------------
-spring.profiles.include:
-  - generic
-spring:
-  profiles: local
-  liquibase:
-    enabled: true
-    change-log: "classpath:db/db-changelog-master.xml"
-    user: "cmapp"
-    password: "cmapp"
-  datasource:
-    username: cmapp
-    password: cmapp
-    url: jdbc:postgresql://localhost:5432/cmapp_service
-logging:
-  config: classpath:logback-spring.xml
-  level:
-    hu.vereba: DEBUG
-    root: INFO
----
-# ------------------------------------------=== DOCKER ===------------------------------------------
-spring.profiles.include:
-  - generic
-spring:
-  profiles: docker
-  liquibase:
-    enabled: true
-    change-log: "classpath:db/db-changelog-master.xml"
-    user: "cmapp"
-    password: "cmapp"
-  datasource:
-    username: cmapp
-    password: cmapp
-    url: jdbc:postgresql://postgres:5432/cmapp_service
-logging:
-  config: classpath:logback-spring.xml
-  level:
-    hu.vereba: INFO
-    root: INFO

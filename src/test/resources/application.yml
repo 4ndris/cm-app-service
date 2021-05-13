@@ -33,7 +33,7 @@ spring:
     change-log: "classpath:test-db/db-changelog-master.xml"
     liquibase-schema: public
 logging:
-  config: classpath:logback-spring.xml
+  config: classpath:logback.xml
   level:
     hu.vereba: DEBUG
     root: INFO
