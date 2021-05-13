@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureEmbeddedDatabase
 @Transactional
 @Rollback
-class ShowServiceTest {
+class ShowServiceTestIT {
 
     @Autowired
     private MockMvc mockMvc;

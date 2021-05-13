@@ -3,7 +3,6 @@ package hu.vereba.snippet.cm.rest.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Max;
@@ -79,7 +78,6 @@ public class Show implements Serializable {
         return this;
     }
 
-    @ApiModelProperty(value = "Show abstract")
     public String getAbstractDesc() {
         return abstractDesc;
     }
@@ -93,7 +91,6 @@ public class Show implements Serializable {
         return this;
     }
 
-    @ApiModelProperty(value = "Age rating")
     public int getAgeRating() {
         return ageRating;
     }
@@ -107,7 +104,6 @@ public class Show implements Serializable {
         return this;
     }
 
-    @ApiModelProperty(value = "Show availability date and time in UTC")
     public LocalDateTime getAvailabilityFromUtcIso() {
         return availabilityFromUtcIso;
     }
@@ -121,7 +117,6 @@ public class Show implements Serializable {
         return this;
     }
 
-    @ApiModelProperty(value = "Show image URL")
     public String getBackgroundUrl() {
         return backgroundUrl;
     }
@@ -135,7 +130,6 @@ public class Show implements Serializable {
         return this;
     }
 
-    @ApiModelProperty(value = "Cast of the show")
     public String getCast() {
         return cast;
     }
@@ -149,7 +143,6 @@ public class Show implements Serializable {
         return this;
     }
 
-    @ApiModelProperty(value = "Category of the show")
     public ShowType getCategory() {
         return category;
     }
@@ -163,7 +156,6 @@ public class Show implements Serializable {
         return this;
     }
 
-    @ApiModelProperty(value = "Director of the show")
     public String getDirector() {
         return director;
     }
@@ -177,7 +169,6 @@ public class Show implements Serializable {
         return this;
     }
 
-    @ApiModelProperty(value = "Edited versopn of abstract")
     public String getEditedAbstract() {
         return editedAbstract;
     }
@@ -191,7 +182,6 @@ public class Show implements Serializable {
         return this;
     }
 
-    @ApiModelProperty(value = "Genre of the show")
     public String getGenre() {
         return genre;
     }
@@ -200,7 +190,6 @@ public class Show implements Serializable {
         this.genre = genre;
     }
 
-    @ApiModelProperty(value = "Unique id of the show")
     public String getId() {
         return id;
     }
@@ -214,7 +203,6 @@ public class Show implements Serializable {
         return this;
     }
 
-    @ApiModelProperty(value = "Title of the show")
     public String getName() {
         return name;
     }
@@ -228,7 +216,6 @@ public class Show implements Serializable {
         return this;
     }
 
-    @ApiModelProperty(value = "Production year of the show")
     public int getProductionYear() {
         return productionYear;
     }
@@ -237,7 +224,6 @@ public class Show implements Serializable {
         this.productionYear = productionYear;
     }
 
-    @ApiModelProperty(value = "Number of seasons of a show")
     public Integer getSeasons() {
         return seasons;
     }
