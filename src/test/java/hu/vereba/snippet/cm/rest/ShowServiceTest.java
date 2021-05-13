@@ -3,6 +3,8 @@ package hu.vereba.snippet.cm.rest;
 import hu.vereba.snippet.cm.application.CmAppServiceApplication;
 import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureEmbeddedDatabase
 @Transactional
 @Rollback
-public class ShowServiceTest {
+class ShowServiceTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -49,7 +51,7 @@ public class ShowServiceTest {
     @Test
     void createShowShallSuccessful() throws Exception {
         //GIVEN
-        byte[] jsonContent = getContent("show_controller_create_show_valid.json");
+        byte[] jsonContent = getContent("series/show_controller_create_valid.json");
 
         //WHEN
         mockMvc.perform(
@@ -65,7 +67,7 @@ public class ShowServiceTest {
     @Test
     void createShowShallFailWithDuplicateId() throws Exception {
         //GIVEN
-        byte[] jsonContent = getContent("show_controller_create_show_valid.json");
+        byte[] jsonContent = getContent("series/show_controller_create_valid.json");
 
         //WHEN
         mockMvc.perform(
@@ -83,42 +85,14 @@ public class ShowServiceTest {
                 .andExpect(status().isConflict());
     }
 
-    @Test
-    void createShowShallFailWithIncompleteRequest() throws Exception {
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "series/show_controller_create_inc.json",
+            "series/show_controller_create_invalid_rating.json",
+            "series/show_controller_create_invalid_prod_year.json"})
+    void createShowShallFailWithInvalidContent(String path) throws Exception {
         //GIVEN
-        byte[] jsonContent = getContent("show_controller_create_show_inc.json");
-
-        //WHEN
-        mockMvc.perform(
-                post(ShowEndpoint.URL_SHOWS)
-                        .content(jsonContent)
-                        .contentType(MediaType.APPLICATION_JSON)
-        )
-                .andDo(print())
-                //THEN
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void createShowShallFailWithInvalidRating() throws Exception {
-        //GIVEN
-        byte[] jsonContent = getContent("show_controller_create_show_invalid_rating.json");
-
-        //WHEN
-        mockMvc.perform(
-                post(ShowEndpoint.URL_SHOWS)
-                        .content(jsonContent)
-                        .contentType(MediaType.APPLICATION_JSON)
-        )
-                .andDo(print())
-                //THEN
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void createShowShallFailWithInvalidProdYear() throws Exception {
-        //GIVEN
-        byte[] jsonContent = getContent("show_controller_create_show_invalid_prod_year.json");
+        byte[] jsonContent = getContent(path);
 
         //WHEN
         mockMvc.perform(
@@ -163,7 +137,7 @@ public class ShowServiceTest {
     @Test
     void updateShowShallSuccessful() throws Exception {
         //GIVEN
-        byte[] jsonContent = getContent("show_controller_update_show_valid.json");
+        byte[] jsonContent = getContent("series/show_controller_update_valid.json");
         String id = "tt8103070";
 
         //WHEN
@@ -182,7 +156,7 @@ public class ShowServiceTest {
     @Test
     void updateShowShallShallFailWithIncompleteRequest() throws Exception {
         //GIVEN
-        byte[] jsonContent = getContent("show_controller_update_show_inc.json");
+        byte[] jsonContent = getContent("series/show_controller_update_inc.json");
         String id = "tt8103070";
 
         //WHEN
@@ -200,7 +174,7 @@ public class ShowServiceTest {
     @Test
     void updateShowShallShallFailWithNonExistingShow() throws Exception {
         //GIVEN
-        byte[] jsonContent = getContent("show_controller_update_show_valid.json");
+        byte[] jsonContent = getContent("series/show_controller_update_valid.json");
         String id = "ccfad5bd-716d-9f55-0f0d-cd6f71864c5b";
 
         //WHEN
@@ -218,7 +192,7 @@ public class ShowServiceTest {
     @Test
     void updateShowShallShallFailWithInvalidContent() throws Exception {
         //GIVEN
-        byte[] jsonContent = getContent("show_controller_update_show_invalid.json");
+        byte[] jsonContent = getContent("series/show_controller_update_invalid.json");
         String id = "tt8103070";
 
         //WHEN

@@ -1,6 +1,6 @@
 {
   "Abstract": "Test abstract",
-  "AgeRating": 12,
+  "AgeRating": 235,
   "AvailabilityFromUtcIso": "2020-08-09T12:42:22.413Z",
   "BackgroundUrl": "http://test.srv.hu/test.jpg",
   "Cast": "Test A, Test B",
@@ -10,5 +10,6 @@
   "Genre": "dráma",
   "Id": "aa4eb909-2d8d-4495-b1de-b3da9e2d4b2e",
   "Name": "Test Show",
-  "ProductionYear": 2020
+  "ProductionYear": 2020,
+  "Seasons": 3
 }
