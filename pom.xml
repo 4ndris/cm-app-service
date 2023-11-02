@@ -5,17 +5,17 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.5</version>
+		<version>3.1.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>hu.vereba.snippet</groupId>
+	<groupId>hu.vereba.demo</groupId>
 	<artifactId>cm-app-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cm-app-service</name>
 	<description>Content Manager - Service</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
@@ -40,8 +40,13 @@
 		</dependency>
 		<dependency>
 			<groupId>com.vladmihalcea</groupId>
-			<artifactId>hibernate-types-52</artifactId>
-			<version>2.9.7</version>
+			<artifactId>hibernate-types-60</artifactId>
+			<version>2.21.1</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
+			<version>3.1.0</version>
 		</dependency>
 
 		<!--Web-->
@@ -62,7 +67,7 @@
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
-			<version>2.3.6</version>
+			<version>3.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.module</groupId>
@@ -96,7 +101,7 @@
 		<dependency>
 			<groupId>io.zonky.test</groupId>
 			<artifactId>embedded-database-spring-test</artifactId>
-			<version>1.5.4</version>
+			<version>2.3.0</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -116,30 +121,74 @@
 			<artifactId>micrometer-registry-prometheus</artifactId>
 		</dependency>
 
-		<!-- Logging -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.25</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>log4j-over-slf4j</artifactId>
-			<version>1.7.25</version>
-		</dependency>
 
 		<!-- OpenAPI 3-->
 		<dependency>
 			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.5.8</version>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>2.2.18</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.6</version>
 		</dependency>
 
-
+		<!-- H2 DB -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>7.0.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/openapi/cm-app.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<output>${project.basedir}</output>
+							<apiPackage>hu.vereba.cm.rest.api</apiPackage>
+							<modelPackage>hu.vereba.cm.rest.model</modelPackage>
+							<configOptions>
+								<!--<sourceFolder>src/main/java/main</sourceFolder>-->
+								<delegatePattern>false</delegatePattern>
+								<dateLibrary>java8</dateLibrary>
+								<title>CM APP API</title>
+								<interfaceOnly>true</interfaceOnly>
+								<skipDefaultInterface>true</skipDefaultInterface>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+								<useTags>true</useTags>
+								<additionalModelTypeAnnotations>
+									@JsonInclude(JsonInclude.Include.NON_NULL)
+								</additionalModelTypeAnnotations>
+								<addOneOfInterfaces>true</addOneOfInterfaces>
+								<addOneOfInterfaceImports>true</addOneOfInterfaceImports>
+								<useSpringBoot3>true</useSpringBoot3>
+							</configOptions>
+							<skipOverwrite>true</skipOverwrite>
+							<generateSupportingFiles>false</generateSupportingFiles>
+							<additionalProperties>
+								useTags=true
+							</additionalProperties>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

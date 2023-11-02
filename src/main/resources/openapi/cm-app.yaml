@@ -1,0 +1,242 @@
+openapi: 3.0.3
+info:
+  title: OpenAPI definition
+  description: Content Management API
+  version: v1
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /services/shows/{id}:
+    get:
+      tags:
+        - Show
+      summary: Get show with a specific ID
+      operationId: getShow
+      parameters:
+        - name: id
+          description: Id of the show
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Show'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          $ref: '#/components/responses/ShowNotFound'
+        '405':
+          description: Validation exception
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Show
+      summary: Update show for a given ID
+      operationId: updateShow
+      parameters:
+        - name: id
+          description: Id of the show
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Show'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Show'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          $ref: '#/components/responses/ShowNotFound'
+        '405':
+          description: Validation exception
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Show
+      summary: Delete show with a specific ID
+      operationId: deleteShow
+      parameters:
+        - name: id
+          description: Id of the show
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid ID supplied
+        '404':
+          $ref: '#/components/responses/ShowNotFound'
+        '405':
+          description: Validation exception
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /services/shows:
+    get:
+      tags:
+        - Show
+      summary: Get the list of shows (movies and series)
+      operationId: listShows
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shows'
+    post:
+      tags:
+        - Show
+      summary: Create a new show (movie or series)
+      operationId: addShow
+      requestBody:
+        description: Show resource to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Show'
+        required: true
+      responses:
+        '201':
+          description: Show created
+        '400':
+          description: Invalid request sent
+        '409':
+          description: Id already exist among items
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /:
+    get:
+      tags:
+        - Show
+      summary: Welcome page
+      operationId: welcome
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    Show:
+      required:
+        - Abstract
+        - AgeRating
+        - AvailabilityFromUtcIso
+        - BackgroundUrl
+        - Cast
+        - Director
+        - EditedAbstract
+        - Genre
+        - Id
+        - Name
+        - ProductionYear
+        - Seasons
+      type: object
+      properties:
+        Abstract:
+          type: string
+        AgeRating:
+          maximum: 21
+          minimum: 0
+          type: integer
+          format: int32
+        AvailabilityFromUtcIso:
+          type: string
+          format: date-time
+        BackgroundUrl:
+          type: string
+        Cast:
+          type: string
+        Category:
+          type: string
+          enum:
+            - MOVIE
+            - SERIES
+        Director:
+          type: string
+        EditedAbstract:
+          type: string
+        Genre:
+          type: string
+        Id:
+          type: string
+        Name:
+          type: string
+        ProductionYear:
+          minimum: 1874
+          type: integer
+          format: int32
+        Seasons:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+    ErrorMessage:
+      type: object
+      properties:
+        error:
+          type: string
+        details:
+          type: string
+    Shows:
+      type: object
+      properties:
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Show'
+
+  responses:
+    ShowNotFound:
+      description: |
+        Show not found
+        
+        Details
+        ---
+        - SHOW_NOT_FOUND
+          > Show not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            example:
+              value:
+                error: SHOW_NOT_FOUND
+                details: Resource with id not found
+    InternalServerError:
+      description: |
+        Internal error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          examples:
+            example:
+              value:
+                error: INTERNAL_ERROR
+                details: Internal server error occurred
+

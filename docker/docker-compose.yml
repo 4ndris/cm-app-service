@@ -3,7 +3,7 @@ version: "3.7"
 services:
   cm-app-service:
     container_name: cm-app-service
-    image: snippet/cm-app-service
+    image: demo/cm-app-service
     build:
       context: ..
       dockerfile: ./Dockerfile

@@ -7,7 +7,7 @@
             <column name="item_id" autoIncrement="true" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="abstract" type="VARCHAR(2147483647)">
+            <column name="abstract" type="VARCHAR(10485760)">
                 <constraints nullable="false"/>
             </column>
             <column name="age_rating" type="SMALLINT">
@@ -16,28 +16,28 @@
             <column name="availability_from_utc_iso" type="timestamp with time zone">
                 <constraints nullable="false"/>
             </column>
-            <column name="background_url" type="VARCHAR(2147483647)">
+            <column name="background_url" type="VARCHAR(10485760)">
                 <constraints nullable="false"/>
             </column>
-            <column name="cast" type="VARCHAR(2147483647)">
+            <column name="cast" type="VARCHAR(10485760)">
                 <constraints nullable="false"/>
             </column>
-            <column name="category" type="VARCHAR(2147483647)">
+            <column name="category" type="VARCHAR(10485760)">
                 <constraints nullable="false"/>
             </column>
-            <column name="director" type="VARCHAR(2147483647)">
+            <column name="director" type="VARCHAR(10485760)">
                 <constraints nullable="false"/>
             </column>
-            <column name="edited_abstract" type="VARCHAR(2147483647)">
+            <column name="edited_abstract" type="VARCHAR(10485760)">
                 <constraints nullable="false"/>
             </column>
-            <column name="genre" type="VARCHAR(2147483647)">
+            <column name="genre" type="VARCHAR(10485760)">
                 <constraints nullable="false"/>
             </column>
-            <column name="id" type="VARCHAR(2147483647)">
+            <column name="id" type="VARCHAR(10485760)">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" type="VARCHAR(2147483647)">
+            <column name="name" type="VARCHAR(10485760)">
                 <constraints nullable="false"/>
             </column>
             <column name="production_year" type="SMALLINT">

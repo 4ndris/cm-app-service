@@ -4,14 +4,13 @@ spring:
   liquibase:
     enabled: true
     change-log: "classpath:db/db-changelog-master.xml"
-    user: "sa"
-    password: ""
-    url: "jdbc:h2:mem:cmapp_service"
+    user: "cmapp"
+    password: "cmapp"
+    url: "jdbc:postgresql://localhost:5432/cmapp_service"
   datasource:
-    username: sa
-    password:
-    url: jdbc:h2:mem:cmapp_service;MODE=MySQL;DATABASE_TO_LOWER=TRUE
-    #driver-class-name: org.h2.Driver
+    username: cmapp
+    password: cmapp
+    url: jdbc:postgresql://localhost:5432/cmapp_service
   jpa:
     show-sql: false
     properties:
@@ -21,7 +20,6 @@ spring:
     hibernate:
       ddl-auto: "none"
     generate-ddl: false
-    #database-platform: org.hibernate.dialect.H2Dialect
 server:
   port: 8080
 logging:
@@ -40,7 +38,7 @@ management:
     web:
       exposure:
         include: "*"
-  prometheus:
-    metrics:
-      export:
+  metrics:
+    export:
+      prometheus:
         enabled: true
