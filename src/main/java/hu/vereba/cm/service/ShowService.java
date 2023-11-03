@@ -24,7 +24,7 @@ public class ShowService {
     private final ShowMapper showMapper;
 
     @Autowired
-    public ShowService(ShowRepository showRepository, ShowMapper showMapper) {
+    public ShowService(ShowRepository<BaseShowEntity> showRepository, ShowMapper showMapper) {
 
         this.showRepository = showRepository;
         this.showMapper = showMapper;
