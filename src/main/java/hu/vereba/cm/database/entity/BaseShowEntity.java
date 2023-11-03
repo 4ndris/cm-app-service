@@ -3,6 +3,7 @@ package hu.vereba.cm.database.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @Entity
@@ -18,7 +19,7 @@ public class BaseShowEntity {
     @Column(name = "abstract")
     private String abstractDesc;
     private int ageRating;
-    private LocalDateTime availabilityFromUtcIso;
+    private OffsetDateTime availabilityFromUtcIso;
     private String backgroundUrl;
     private String cast;
     @Column(name = "category", insertable=false, updatable=false) //discriminator column
@@ -57,11 +58,11 @@ public class BaseShowEntity {
     }
 
 
-    public LocalDateTime getAvailabilityFromUtcIso() {
+    public OffsetDateTime getAvailabilityFromUtcIso() {
         return availabilityFromUtcIso;
     }
 
-    public void setAvailabilityFromUtcIso(LocalDateTime availabilityFromUtcIso) {
+    public void setAvailabilityFromUtcIso(OffsetDateTime availabilityFromUtcIso) {
         this.availabilityFromUtcIso = availabilityFromUtcIso;
     }
 

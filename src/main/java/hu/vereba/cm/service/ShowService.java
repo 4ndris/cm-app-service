@@ -7,9 +7,8 @@ import hu.vereba.cm.database.respository.ShowRepository;
 import hu.vereba.cm.exception.DuplicateShowIdException;
 import hu.vereba.cm.exception.InvalidCategoryException;
 import hu.vereba.cm.exception.ShowNotFoundException;
+import hu.vereba.cm.mapper.ShowMapper;
 import hu.vereba.cm.rest.model.Show;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,19 +21,19 @@ import java.util.stream.Collectors;
 public class ShowService {
 
     private final ShowRepository<BaseShowEntity> showRepository;
-    private final ModelMapper modelMapper;
+    private final ShowMapper showMapper;
 
     @Autowired
-    public ShowService(ShowRepository showRepository, ModelMapper modelMapper) {
+    public ShowService(ShowRepository showRepository, ShowMapper showMapper) {
 
         this.showRepository = showRepository;
-        this.modelMapper = modelMapper;
+        this.showMapper = showMapper;
     }
 
     public List<Show> getShowList() {
         List<? extends BaseShowEntity> showEntities = showRepository.findAll();
         return showEntities.stream()
-                .map(showEntity -> modelMapper.map(showEntity, Show.class))
+                .map(showMapper::entityToShow)
                 .collect(Collectors.toList());
     }
 
@@ -49,11 +48,11 @@ public class ShowService {
 
         switch (show.getCategory()) {
             case MOVIE:
-                MovieEntity movieEntity = modelMapper.map(show, MovieEntity.class);
+                MovieEntity movieEntity = showMapper.showToMovieEntity(show);
                 showRepository.save(movieEntity);
                 break;
             case SERIES:
-                SeriesEntity seriesEntity = modelMapper.map(show, SeriesEntity.class);
+                SeriesEntity seriesEntity = showMapper.showToSeriesEntity(show);
                 showRepository.save(seriesEntity);
                 break;
             default:
@@ -63,14 +62,14 @@ public class ShowService {
 
     public Show getShow(String id) {
         BaseShowEntity showEntity = showRepository.findById(id).orElseThrow(() -> new ShowNotFoundException(id));
-        return modelMapper.map(showEntity, Show.class);
+        return showMapper.entityToShow(showEntity);
     }
 
     @Transactional
     public Show updateShow(String id, Show show) {
-        BaseShowEntity showEntity = showRepository.findById(id).orElseThrow(() -> new ShowNotFoundException(id));
-        modelMapper.map(show, showEntity);
-        return modelMapper.map(showEntity, Show.class);
+        var showEntity = showRepository.findById(id).orElseThrow(() -> new ShowNotFoundException(id));
+        showEntity = showMapper.showToEntity(show);
+        return showMapper.entityToShow(showEntity);
     }
 
     @Transactional

@@ -156,7 +156,7 @@ components:
         - Seasons
       type: object
       properties:
-        Abstract:
+        AbstractDesc:
           type: string
         AgeRating:
           maximum: 21

@@ -23,8 +23,7 @@ import java.util.Objects;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
 public class Show {
 
-  @JsonProperty("Abstract")
-  private String _abstract;
+  private String abstractDesc;
 
   private Integer ageRating;
 
@@ -93,8 +92,7 @@ public class Show {
   /**
    * Constructor with only required parameters
    */
-  public Show(String _abstract, Integer ageRating, OffsetDateTime availabilityFromUtcIso, String backgroundUrl, String cast, String director, String editedAbstract, String genre, String id, String name, Integer productionYear, Integer seasons) {
-    this._abstract = _abstract;
+  public Show(Integer ageRating, OffsetDateTime availabilityFromUtcIso, String backgroundUrl, String cast, String director, String editedAbstract, String genre, String id, String name, Integer productionYear, Integer seasons) {
     this.ageRating = ageRating;
     this.availabilityFromUtcIso = availabilityFromUtcIso;
     this.backgroundUrl = backgroundUrl;
@@ -108,24 +106,24 @@ public class Show {
     this.seasons = seasons;
   }
 
-  public Show _abstract(String _abstract) {
-    this._abstract = _abstract;
+  public Show abstractDesc(String abstractDesc) {
+    this.abstractDesc = abstractDesc;
     return this;
   }
 
   /**
-   * Get _abstract
-   * @return _abstract
+   * Get abstractDesc
+   * @return abstractDesc
   */
-  @NotNull 
-  @Schema(name = "Abstract", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("Abstract")
-  public String getAbstract() {
-    return _abstract;
+  
+  @Schema(name = "AbstractDesc", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("AbstractDesc")
+  public String getAbstractDesc() {
+    return abstractDesc;
   }
 
-  public void setAbstract(String _abstract) {
-    this._abstract = _abstract;
+  public void setAbstractDesc(String abstractDesc) {
+    this.abstractDesc = abstractDesc;
   }
 
   public Show ageRating(Integer ageRating) {
@@ -382,7 +380,7 @@ public class Show {
       return false;
     }
     Show show = (Show) o;
-    return Objects.equals(this._abstract, show._abstract) &&
+    return Objects.equals(this.abstractDesc, show.abstractDesc) &&
         Objects.equals(this.ageRating, show.ageRating) &&
         Objects.equals(this.availabilityFromUtcIso, show.availabilityFromUtcIso) &&
         Objects.equals(this.backgroundUrl, show.backgroundUrl) &&
@@ -399,14 +397,14 @@ public class Show {
 
   @Override
   public int hashCode() {
-    return Objects.hash(_abstract, ageRating, availabilityFromUtcIso, backgroundUrl, cast, category, director, editedAbstract, genre, id, name, productionYear, seasons);
+    return Objects.hash(abstractDesc, ageRating, availabilityFromUtcIso, backgroundUrl, cast, category, director, editedAbstract, genre, id, name, productionYear, seasons);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Show {\n");
-    sb.append("    _abstract: ").append(toIndentedString(_abstract)).append("\n");
+    sb.append("    abstractDesc: ").append(toIndentedString(abstractDesc)).append("\n");
     sb.append("    ageRating: ").append(toIndentedString(ageRating)).append("\n");
     sb.append("    availabilityFromUtcIso: ").append(toIndentedString(availabilityFromUtcIso)).append("\n");
     sb.append("    backgroundUrl: ").append(toIndentedString(backgroundUrl)).append("\n");

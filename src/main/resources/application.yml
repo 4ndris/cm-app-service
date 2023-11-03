@@ -11,7 +11,6 @@ spring:
     username: sa
     password:
     url: jdbc:h2:mem:cmapp_service;MODE=MySQL;DATABASE_TO_LOWER=TRUE
-    #driver-class-name: org.h2.Driver
   jpa:
     show-sql: false
     properties:
@@ -21,7 +20,9 @@ spring:
     hibernate:
       ddl-auto: "none"
     generate-ddl: false
-    #database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
 server:
   port: 8080
 logging:
