@@ -1,7 +1,6 @@
 package hu.vereba.cm.rest;
 
 import hu.vereba.cm.application.CmAppServiceApplication;
-import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -28,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = CmAppServiceApplication.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-@AutoConfigureEmbeddedDatabase(type = AutoConfigureEmbeddedDatabase.DatabaseType.POSTGRES)
 @Transactional
 @Rollback
 class ShowServiceTestIT {
