@@ -34,4 +34,5 @@ build/
 
 log
 gen
+.openapi-generator
 
