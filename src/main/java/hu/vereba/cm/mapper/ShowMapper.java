@@ -4,7 +4,8 @@ import hu.vereba.cm.database.entity.BaseShowEntity;
 import hu.vereba.cm.database.entity.MovieEntity;
 import hu.vereba.cm.database.entity.SeriesEntity;
 import hu.vereba.cm.rest.model.Show;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper
 public interface ShowMapper {

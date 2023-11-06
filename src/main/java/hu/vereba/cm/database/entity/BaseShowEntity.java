@@ -2,7 +2,6 @@ package hu.vereba.cm.database.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
