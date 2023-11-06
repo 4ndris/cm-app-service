@@ -6,9 +6,9 @@
 </a>
 
 #### Requirements
-* Java 11 (JDK) (only for debug)
+* Java 17
 * Maven 3.6+ (only for debug)
-* Docker 2.3+
+* Docker v4+
 
 #### Run
 Run the application from the following directory: ```${project.home}/docker```
