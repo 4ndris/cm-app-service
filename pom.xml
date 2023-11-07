@@ -128,7 +128,6 @@
 			<artifactId>micrometer-registry-prometheus</artifactId>
 		</dependency>
 
-
 		<!-- OpenAPI 3-->
 		<dependency>
 			<groupId>org.springdoc</groupId>
@@ -151,6 +150,13 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Other -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.15.3</version>
 		</dependency>
 	</dependencies>
 
