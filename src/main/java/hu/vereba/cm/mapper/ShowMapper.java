@@ -4,24 +4,25 @@ import hu.vereba.cm.database.entity.BaseShowEntity;
 import hu.vereba.cm.database.entity.MovieEntity;
 import hu.vereba.cm.database.entity.SeriesEntity;
 import hu.vereba.cm.rest.model.Show;
+
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.SubclassMapping;
 
 @Mapper
 public interface ShowMapper {
-    @Mapping(target = "seasons", source = "seasons")
-    Show entityToShow(SeriesEntity entity);
 
     @Mapping(target = "seasons", ignore = true)
-    Show entityToShow(MovieEntity entity);
+    @SubclassMapping(source = SeriesEntity.class, target = Show.class)
+    @SubclassMapping(source = MovieEntity.class, target = Show.class)
+    Show entityToShow(BaseShowEntity entity);
 
-    default Show entityToShow(BaseShowEntity entity) {
-        if (entity instanceof SeriesEntity) {
-            return entityToShow((SeriesEntity) entity);
-        } else if (entity instanceof MovieEntity) {
-            return entityToShow((MovieEntity) entity);
-        } else {
-            throw new IllegalArgumentException("Unsupported entity type");
+    @AfterMapping
+    default void addSeasonsOptinally(BaseShowEntity entity, @MappingTarget Show show) {
+        if(entity instanceof SeriesEntity) {
+            show.setSeasons(((SeriesEntity)entity).getSeasons());
         }
     }
 

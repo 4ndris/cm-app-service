@@ -13,13 +13,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import hu.vereba.cm.rest.model.Show;
 import io.restassured.RestAssured;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.assertj.core.api.Assertions.*;
 
 @PactConsumerTest
 @PactTestFor(providerName = "ShowProvider", pactVersion = PactSpecVersion.V3)
@@ -33,29 +34,29 @@ public class ShowServicePactConsumerTest {
     }
 
     @Pact(consumer="ShowConsumer")
-    public RequestResponsePact createPact(PactDslWithProvider builder) throws IOException {
+    public RequestResponsePact specificTitle(PactDslWithProvider builder) throws IOException {
 
         Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
+        //headers.put("Content-Type", "application/json");
 
         PactDslJsonBody body = new PactDslJsonBody()
-                .stringType("AbstractDesc")
-                .numberType("AgeRating", 12)
+                .stringType("AbstractDesc", "Sample abstract")
+                .numberType("AgeRating")
                 .datetime("AvailabilityFromUtcIso", "yyyy-MM-dd'T'HH:mm:ssXXX")
                 .stringType("BackgroundUrl")
                 .stringType("Cast")
-                .stringType("Category", "SERIES")
+                .stringMatcher("Category", "MOVIE|SERIES")
                 .stringType("Director")
-                .stringType("EditedAbstract")
+                .stringType("EditedAbstract", "Sample edited absract")
                 .stringType("Genre")
                 .stringType("Id")
                 .stringType("Name", "Batwoman")
-                .numberType("ProductionYear", 2019)
-                .numberType("Seasons", 3);
+                .numberType("ProductionYear")
+                .numberType("Seasons");
 
         return builder
-                .given("test state")
-                .uponReceiving("ExampleJavaConsumerPactTest test interaction")
+                .given("initial state")
+                .uponReceiving("retrieve specific show")
                     .path("/services/shows/tt8712204")
                     .method("GET")
                 .willRespondWith()
@@ -65,8 +66,26 @@ public class ShowServicePactConsumerTest {
                 .toPact();
     }
 
+    @Pact(consumer="ShowConsumer")
+    public RequestResponsePact titleNotFound(PactDslWithProvider builder) throws IOException {
+
+        Map<String, String> headers = new HashMap<>();
+        //headers.put("Content-Type", "application/json");
+
+        return builder
+                .given("show not exist")
+                .uponReceiving("retrieve specific show")
+                    .path("/services/shows/tt8712205")
+                    .method("GET")
+                .willRespondWith()
+                    .status(404)
+                    .headers(headers)
+                .toPact();
+    }
+
     @Test
-    void testOnMockServer(MockServer mockServer) throws JsonProcessingException {
+    @PactTestFor(pactMethod = "specificTitle")
+    void testSpecificTitle(MockServer mockServer) throws JsonProcessingException {
         String actualJson = RestAssured.
             given()
                 .baseUri(mockServer.getUrl())
@@ -77,9 +96,21 @@ public class ShowServicePactConsumerTest {
                 .extract().asString();
 
         Show actual = objectMapper.readValue(actualJson, Show.class);
-        Assertions.assertThat(actual)
-                .extracting("Name", "ProductionYear", "Category")
-                .containsExactly("Batwoman", 2019, Show.CategoryEnum.SERIES);
+        assertThat(actual.getName()).isEqualTo("Batwoman");
+    }
 
+    @Test
+    @PactTestFor(pactMethod = "titleNotFound")
+    void testTitleNotFound(MockServer mockServer) throws JsonProcessingException {
+        String actualJson = RestAssured.
+            given()
+                .baseUri(mockServer.getUrl())
+            .when()
+                .get("/services/shows/tt8712205")
+            .then()
+                .statusCode(404)
+                .extract().asString();
+
+        assertThat(actualJson).isEqualTo("");
     }
 }
