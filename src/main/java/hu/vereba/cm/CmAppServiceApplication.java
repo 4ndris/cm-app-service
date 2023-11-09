@@ -1,4 +1,4 @@
-package hu.vereba.cm.application;
+package hu.vereba.cm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
