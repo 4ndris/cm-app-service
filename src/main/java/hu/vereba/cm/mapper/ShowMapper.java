@@ -26,6 +26,7 @@ public interface ShowMapper {
         }
     }
 
+    @SuppressWarnings("unchecked") 
     default <T extends BaseShowEntity> T showToEntity(Show show) {
         if(show.getCategory() == Show.CategoryEnum.SERIES) {
             return (T) showToSeriesEntity(show);
