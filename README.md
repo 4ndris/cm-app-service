@@ -10,13 +10,13 @@
 * Maven 3.6+ (only for debug)
 * Docker v4+
 
-#### Run
+### Run
 
 Run application: ```mvn spring-boot:run```
 
 ### Gitpod
 
-* Open Project in GitPod:
+Open Project in GitPod:
 
 * Sing-in with GitHub account
 
@@ -24,7 +24,7 @@ Run application: ```mvn spring-boot:run```
 
 * Create documentation in the README.md under the Documentation section
 
-* IMPORTANT: Enable Repository permissions (e.g. git push) for GitPod when coding from Web IDE here: https://gitpod.io/integrations
+* **IMPORTANT:** Enable Repository permissions (e.g. git push) for GitPod when coding from Web IDE here: https://gitpod.io/integrations
 
 
 #### URLs
