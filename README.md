@@ -20,10 +20,6 @@ Open Project in GitPod:
 
 * Sing-in with GitHub account
 
-* Create and commit your solution into your forked repository
-
-* Create documentation in the README.md under the Documentation section
-
 * **IMPORTANT:** Enable Repository permissions (e.g. git push) for GitPod when coding from Web IDE here: https://gitpod.io/integrations
 
 
