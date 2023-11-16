@@ -20,8 +20,6 @@ Open Project in GitPod:
 
 * Sing-in with GitHub account
 
-* **IMPORTANT:** Enable Repository permissions (e.g. git push) for GitPod when coding from Web IDE here: https://gitpod.io/integrations
-
 
 #### URLs
 
