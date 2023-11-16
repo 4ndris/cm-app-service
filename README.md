@@ -11,25 +11,20 @@
 * Docker v4+
 
 #### Run
-Run the application from the following directory: ```${project.home}/docker```
-
-Command: ```docker-compose up```
-
-#### Debug - optional
-
-Run the DB only from the following directory: ```${project.home}/docker```
-
-Run DB: ```docker-compose -f docker-compose-db.yml up```
-
-After DB spin up:
 
 Run application: ```mvn spring-boot:run```
 
 ### Gitpod
 
-Enable docker:
-run sudo docker-up in a Terminal
-run docker-compose up in another Terminal
+* Open Project in GitPod:
+
+* Sing-in with GitHub account
+
+* Create and commit your solution into your forked repository
+
+* Create documentation in the README.md under the Documentation section
+
+* IMPORTANT: Enable Repository permissions (e.g. git push) for GitPod when coding from Web IDE here: https://gitpod.io/integrations
 
 
 #### URLs
