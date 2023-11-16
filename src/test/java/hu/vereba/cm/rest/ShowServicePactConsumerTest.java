@@ -37,7 +37,7 @@ public class ShowServicePactConsumerTest {
     public RequestResponsePact specificTitle(PactDslWithProvider builder) throws IOException {
 
         Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
+        //headers.put("Content-Type", "application/json");
 
         PactDslJsonBody body = new PactDslJsonBody()
                 .stringType("AbstractDesc", "Sample abstract")
