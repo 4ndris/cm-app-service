@@ -2,30 +2,15 @@ version: '3'
 services:
   postgres:
     image: postgres:latest
-    container_name: pact_postgres
+    container_name: cm-app-postgres
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: mysecretpassword
-      POSTGRES_USER: pact_broker
-      POSTGRES_DB: pact_broker
+      POSTGRES_DB: cmapp_service
+      POSTGRES_USER: cmapp
+      POSTGRES_PASSWORD: cmapp
     volumes:
-      - "postgres-data:/var/lib/postgresql/data"
-
-  pact-broker:
-    image: pactfoundation/pact-broker:latest
-    container_name: pact_broker
-    depends_on:
-      - postgres
-    ports:
-      - "9292:9292"
-    environment:
-      PACT_BROKER_DATABASE_USERNAME: pact_broker
-      PACT_BROKER_DATABASE_PASSWORD: mysecretpassword
-      PACT_BROKER_DATABASE_HOST: postgres
-      PACT_BROKER_DATABASE_NAME: pact_broker
-    links:
-      - postgres
+      - postgres-data:/var/lib/postgresql/data
 
 volumes:
   postgres-data:

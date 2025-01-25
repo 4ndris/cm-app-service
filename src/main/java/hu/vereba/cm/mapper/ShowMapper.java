@@ -11,7 +11,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.SubclassMapping;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ShowMapper {
 
     @Mapping(target = "seasons", ignore = true)

@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.5</version>
+		<version>3.4.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>hu.vereba.demo</groupId>
@@ -15,10 +15,18 @@
 	<description>Content Manager - Service</description>
 
 	<properties>
-		<java.version>17</java.version>
+		<java.version>21</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<mapstruct.version>1.5.5.Final</mapstruct.version>
+		<mapstruct.version>1.6.3</mapstruct.version>
+		<jakarta.persistence-api.version>3.2.0</jakarta.persistence-api.version>
+		<mockito-core.version>5.15.2</mockito-core.version>
+		<jsonassert.version>1.5.3</jsonassert.version>
+		<rest-assured.version>5.5.0</rest-assured.version>
+		<springdoc-ui.version>2.8.3</springdoc-ui.version>
+		<swagger-annotations.version>2.2.28</swagger-annotations.version>
+		<jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
+		<jackson-datatype-jsr310.version>2.18.2</jackson-datatype-jsr310.version>
 	</properties>
 
 	<dependencies>
@@ -39,23 +47,11 @@
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.vladmihalcea</groupId>
-			<artifactId>hibernate-types-60</artifactId>
-			<version>2.21.1</version>
-		</dependency>
-		<dependency>
-			<groupId>jakarta.persistence</groupId>
-			<artifactId>jakarta.persistence-api</artifactId>
-			<version>3.1.0</version>
-		</dependency>
-
 		<!--Web-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<!--Dev-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -91,37 +87,21 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>3.3.0</version>
+			<version>${mockito-core.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.skyscreamer</groupId>
 			<artifactId>jsonassert</artifactId>
-			<version>1.5.1</version>
+			<version>${jsonassert.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
-			<version>5.3.2</version>
+			<version>${rest-assured.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>au.com.dius.pact.consumer</groupId>
-			<artifactId>junit5</artifactId>
-			<version>4.6.3</version>
-		</dependency>
-		<dependency>
-			<groupId>au.com.dius.pact.provider</groupId>
-			<artifactId>junit5</artifactId>
-			<version>4.6.3</version>
-		</dependency>
-		<dependency>
-			<groupId>au.com.dius.pact.provider</groupId>
-			<artifactId>junit5spring</artifactId>
-			<version>4.6.3</version>
-		</dependency>
-
 		<!-- Spring boot actuator to expose metrics endpoint -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -142,82 +122,55 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.2.0</version>
+			<version>${springdoc-ui.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.swagger.core.v3</groupId>
 			<artifactId>swagger-annotations</artifactId>
-			<version>2.2.18</version>
+			<version>${swagger-annotations.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openapitools</groupId>
 			<artifactId>jackson-databind-nullable</artifactId>
-			<version>0.2.6</version>
+			<version>${jackson-databind-nullable.version}</version>
 		</dependency>
-
-		<!-- H2 DB -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
 		<!-- Other -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
-			<version>2.15.3</version>
+			<version>${jackson-datatype-jsr310.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.orm</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>6.6.5.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.common</groupId>
+			<artifactId>hibernate-commons-annotations</artifactId>
+			<version>6.0.6.Final</version>
+		</dependency>
+		<!-- Test -->
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>testcontainers</artifactId>
+			<version>1.20.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>1.20.4</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>au.com.dius.pact.provider</groupId>
-				<artifactId>maven</artifactId>
-				<version>4.4.9</version>
-				<configuration>
-					<pactBrokerUrl>http://localhost:9292</pactBrokerUrl>
-<!--					<pactBrokerUsername>username</pactBrokerUsername>-->
-<!--					<pactBrokerPassword>password</pactBrokerPassword>-->
-					<systemPropertyVariables>
-						<pact.verifier.publishResults>true</pact.verifier.publishResults>
-					</systemPropertyVariables>
-					<serviceProviders>
-						<!-- You can define as many as you need, but each must have a unique name -->
-						<serviceProvider>
-							<name>ShowProvider</name>
-							<!-- All the provider properties are optional, and have sensible defaults (shown below) -->
-							<protocol>http</protocol>
-							<host>localhost</host>
-							<port>8080</port>
-							<path>/</path>
-							<consumers>
-								<!-- Again, you can define as many consumers for each provider as you need, but each must have a unique name -->
-								<consumer>
-									<name>ShowConsumer</name>
-									<pactUrl>http://localhost:9292/pacts/provider/ShowProvider/consumer/ShowConsumer/latest</pactUrl>
-								</consumer>
-							</consumers>
-						</serviceProvider>
-					</serviceProviders>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.2.2</version>
-				<configuration>
-					<useSystemClassLoader>false</useSystemClassLoader>
-					<systemPropertyVariables>
-						<pact.verifier.publishResults>true</pact.verifier.publishResults>
-					</systemPropertyVariables>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
+				<version>3.13.0</version>
 				<configuration>
 					<annotationProcessorPaths>
 						<path>
@@ -226,15 +179,12 @@
 							<version>${mapstruct.version}</version>
 						</path>
 					</annotationProcessorPaths>
-					<compilerArgs>
-						<compilerArg>-Amapstruct.defaultComponentModel=spring</compilerArg>
-					</compilerArgs>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.openapitools</groupId>
 				<artifactId>openapi-generator-maven-plugin</artifactId>
-				<version>7.0.1</version>
+				<version>7.11.0</version>
 				<executions>
 					<execution>
 						<goals>
@@ -246,8 +196,9 @@
 							<output>${project.basedir}</output>
 							<apiPackage>hu.vereba.cm.rest.api</apiPackage>
 							<modelPackage>hu.vereba.cm.rest.model</modelPackage>
+							<templateDirectory>src/main/resources/openapi/template/7_11_0</templateDirectory>
 							<configOptions>
-								<!--<sourceFolder>src/main/java/main</sourceFolder>-->
+								<sourceFolder>target/generated-sources/openapi/src/main/java</sourceFolder>
 								<delegatePattern>false</delegatePattern>
 								<dateLibrary>java8</dateLibrary>
 								<title>CM APP API</title>

@@ -31,14 +31,14 @@ logging:
 management:
   endpoint:
     metrics:
-      enabled: true
+      access: read_only
     prometheus:
-      enabled: true
+      access: read_only
   endpoints:
     web:
       exposure:
         include: "*"
-  metrics:
-    export:
-      prometheus:
+  prometheus:
+    metrics:
+      export:
         enabled: true
