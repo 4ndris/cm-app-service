@@ -1,7 +1,7 @@
 package hu.vereba.cm.database.respository;
 
 import hu.vereba.cm.database.entity.BaseShowEntity;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface ShowRepository<T extends BaseShowEntity> extends CrudRepository<T, Long> {
 
     @Override
-    @NotNull
+    @Nonnull
     List<T> findAll();
 
     Optional<T> findById(String id);
