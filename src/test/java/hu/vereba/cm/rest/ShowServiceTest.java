@@ -1,11 +1,13 @@
 package hu.vereba.cm.rest;
 
+import hu.vereba.cm.config.PostgresContainerConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
@@ -24,11 +26,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
+@Import(PostgresContainerConfig.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @Transactional
 @Rollback
-class ShowServiceTestIT {
+class ShowServiceTest {
     
     private final static String URL_SHOWS = "/services/shows";
 
