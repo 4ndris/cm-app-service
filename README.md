@@ -1,24 +1,13 @@
-## Content Manager [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
-
-
-<a href="https://gitpod.io/from-referrer/" style="padding: 10px;">
-    <img src="https://gitpod.io/button/open-in-gitpod.svg" width="150" alt="Push" align="center">
-</a>
+## Content Manager
 
 #### Requirements
-* Java 17
-* Maven 3.6+ (only for debug)
+* Java 21
+* Maven 3.9+
 * Docker v4+
 
 ### Run
 
 Run application: ```mvn spring-boot:run```
-
-### Gitpod
-
-Open Project in GitPod:
-
-* Sing-in with GitHub account
 
 
 #### URLs
