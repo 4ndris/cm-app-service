@@ -143,53 +143,53 @@ components:
     Show:
       required:
         - Abstract
-        - AgeRating
-        - AvailabilityFromUtcIso
-        - BackgroundUrl
-        - Cast
-        - Director
-        - EditedAbstract
-        - Genre
-        - Id
-        - Name
-        - ProductionYear
-        - Seasons
+        - ageRating
+        - availabilityFromUtcIso
+        - backgroundUrl
+        - cast
+        - director
+        - editedAbstract
+        - genre
+        - id
+        - name
+        - productionYear
+        - seasons
       type: object
       properties:
-        AbstractDesc:
+        abstractDesc:
           type: string
-        AgeRating:
+        ageRating:
           maximum: 21
           minimum: 0
           type: integer
           format: int32
-        AvailabilityFromUtcIso:
+        availabilityFromUtcIso:
           type: string
           format: date-time
-        BackgroundUrl:
+        backgroundUrl:
           type: string
-        Cast:
+        cast:
           type: string
-        Category:
+        category:
           type: string
           enum:
             - MOVIE
             - SERIES
-        Director:
+        director:
           type: string
-        EditedAbstract:
+        editedAbstract:
           type: string
-        Genre:
+        genre:
           type: string
-        Id:
+        id:
           type: string
-        Name:
+        name:
           type: string
-        ProductionYear:
+        productionYear:
           minimum: 1874
           type: integer
           format: int32
-        Seasons:
+        seasons:
           maximum: 100
           minimum: 1
           type: integer

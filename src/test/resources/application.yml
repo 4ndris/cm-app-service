@@ -1,25 +1,9 @@
 spring:
   application:
     name: CM Services
-  flyway:
-    enabled: false
-  liquibase:
-    enabled: true
-    change-log: "classpath:test-db/db-changelog-master.xml"
-    liquibase-schema: public
-  datasource:
-    username: cmapp
-    password: cmapp
-    url: jdbc:postgresql://localhost:5432/cmapp_service
-  jpa:
-    show-sql: true
-    properties:
-      hibernate:
-        globally_quoted_identifiers: true
-        format_sql: true
-    hibernate:
-      ddl-auto: "none"
-    generate-ddl: false
+  data:
+    mongodb:
+      uri: mongodb://cmuser:cmpass@localhost:27017/cmdb
 server:
   port: 8080
 logging:
@@ -27,4 +11,3 @@ logging:
   level:
     hu.vereba: DEBUG
     root: INFO
-    liquibase: ERROR

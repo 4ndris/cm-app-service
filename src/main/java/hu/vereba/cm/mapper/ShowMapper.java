@@ -1,47 +1,35 @@
 package hu.vereba.cm.mapper;
 
-import hu.vereba.cm.database.entity.BaseShowEntity;
-import hu.vereba.cm.database.entity.MovieEntity;
-import hu.vereba.cm.database.entity.SeriesEntity;
+import hu.vereba.cm.database.document.ShowDocument;
 import hu.vereba.cm.rest.model.Show;
-
-import org.mapstruct.AfterMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.SubclassMapping;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface ShowMapper {
 
-    @Mapping(target = "seasons", ignore = true)
-    @SubclassMapping(source = SeriesEntity.class, target = Show.class)
-    @SubclassMapping(source = MovieEntity.class, target = Show.class)
-    Show entityToShow(BaseShowEntity entity);
+    @Mapping(source = "category", target = "category", qualifiedByName = "stringToCategory")
+    @Mapping(source = "showId", target = "id")
+    Show documentToShow(ShowDocument document);
 
-    @AfterMapping
-    default void addSeasonsOptinally(BaseShowEntity entity, @MappingTarget Show show) {
-        if(entity instanceof SeriesEntity) {
-            show.setSeasons(((SeriesEntity)entity).getSeasons());
+    @Mapping(source = "category", target = "category", qualifiedByName = "categoryToString")
+    @Mapping(source = "id", target = "showId")
+    ShowDocument showToDocument(Show show);
+
+    // Custom mapping for the category field
+    @Named("stringToCategory")
+    default Show.CategoryEnum stringToCategory(String category) {
+        if (category == null) {
+            return null;
         }
+        return switch (category.toUpperCase()) {
+            case "MOVIE" -> Show.CategoryEnum.MOVIE;
+            case "SERIES" -> Show.CategoryEnum.SERIES;
+            default -> throw new IllegalArgumentException("Unknown category: " + category);
+        };
     }
 
-    @SuppressWarnings("unchecked") 
-    default <T extends BaseShowEntity> T showToEntity(Show show) {
-        if(show.getCategory() == Show.CategoryEnum.SERIES) {
-            return (T) showToSeriesEntity(show);
-        } else if (show.getCategory() == Show.CategoryEnum.MOVIE) {
-            return (T) showToMovieEntity(show);
-        } else {
-            throw new IllegalArgumentException("Unsupported show category");
-        }
+    @Named("categoryToString")
+    default String categoryToString(Show.CategoryEnum category) {
+        return category != null ? category.name() : null;
     }
-
-    @Mapping(target = "itemId", ignore = true) // Let the JPA handle the ID generation
-    @Mapping(target = "category", source = "category.value") // Map category enum value
-    MovieEntity showToMovieEntity(Show show);
-
-    @Mapping(target = "itemId", ignore = true) // Let the JPA handle the ID generation
-    @Mapping(target = "category", source = "category.value") // Map category enum value
-    SeriesEntity showToSeriesEntity(Show show);
 }

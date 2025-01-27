@@ -1,22 +1,18 @@
-version: "3.7"
+version: '3.9'
 
 services:
-  cm-app-service:
-    container_name: cm-app-service
-    image: demo/cm-app-service
-    build:
-      context: ..
-      dockerfile: ./Dockerfile
-      args:
-        execution_env: $EXEC_ENV
-    networks:
-      - cmnet
+  mongodb:
+    image: mongo:8
+    container_name: cm-mongodb
     ports:
-      - $SERVICES_PORT:8080
-
-networks:
-  cmnet:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: cmdbadmin
+      MONGO_INITDB_ROOT_PASSWORD: mysecretpass
+      MONGO_INITDB_DATABASE: cmdb
+    volumes:
+      #- ./mongodb_data:/data/db
+      - ./mongo-init-scripts:/docker-entrypoint-initdb.d
 
 volumes:
-  postgres_data:
-    driver: local
+  mongodb_data:

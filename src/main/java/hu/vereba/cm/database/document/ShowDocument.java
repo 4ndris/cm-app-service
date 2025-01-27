@@ -1,43 +1,51 @@
-package hu.vereba.cm.database.entity;
+package hu.vereba.cm.database.document;
 
-import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.Accessors;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "category", discriminatorType = DiscriminatorType.STRING )
-@Table(name = "SHOW")
-public class BaseShowEntity {
+@Document(collection = "shows")
+//@Getter
+//@Setter
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true) // Include only key fields
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Accessors(chain = false) // Ensures standard JavaBean accessors
+public class ShowDocument {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long itemId;
+    @EqualsAndHashCode.Include
+    private String showId;
 
-    @Column(name = "abstract")
     private String abstractDesc;
     private int ageRating;
     private OffsetDateTime availabilityFromUtcIso;
     private String backgroundUrl;
     private String cast;
-    @Column(name = "category", insertable=false, updatable=false) //discriminator column
-    private String category;
+    private String category; // MOVIE or SERIES
     private String director;
     private String editedAbstract;
     private String genre;
-    private String id;
     private String name;
     private int productionYear;
 
-    public long getItemId() {
-        return itemId;
+    // Optional field for series
+    private Integer seasons;
+
+    //Getters-Setters
+
+    public String getShowId() {
+        return showId;
     }
 
-    public void setItemId(long itemId) {
-        this.itemId = itemId;
+    public void setShowId(String showId) {
+        this.showId = showId;
     }
-
 
     public String getAbstractDesc() {
         return abstractDesc;
@@ -47,7 +55,6 @@ public class BaseShowEntity {
         this.abstractDesc = abstractDesc;
     }
 
-
     public int getAgeRating() {
         return ageRating;
     }
@@ -55,7 +62,6 @@ public class BaseShowEntity {
     public void setAgeRating(int ageRating) {
         this.ageRating = ageRating;
     }
-
 
     public OffsetDateTime getAvailabilityFromUtcIso() {
         return availabilityFromUtcIso;
@@ -65,7 +71,6 @@ public class BaseShowEntity {
         this.availabilityFromUtcIso = availabilityFromUtcIso;
     }
 
-
     public String getBackgroundUrl() {
         return backgroundUrl;
     }
@@ -73,7 +78,6 @@ public class BaseShowEntity {
     public void setBackgroundUrl(String backgroundUrl) {
         this.backgroundUrl = backgroundUrl;
     }
-
 
     public String getCast() {
         return cast;
@@ -83,7 +87,6 @@ public class BaseShowEntity {
         this.cast = cast;
     }
 
-
     public String getCategory() {
         return category;
     }
@@ -91,7 +94,6 @@ public class BaseShowEntity {
     public void setCategory(String category) {
         this.category = category;
     }
-
 
     public String getDirector() {
         return director;
@@ -101,7 +103,6 @@ public class BaseShowEntity {
         this.director = director;
     }
 
-
     public String getEditedAbstract() {
         return editedAbstract;
     }
@@ -109,7 +110,6 @@ public class BaseShowEntity {
     public void setEditedAbstract(String editedAbstract) {
         this.editedAbstract = editedAbstract;
     }
-
 
     public String getGenre() {
         return genre;
@@ -119,16 +119,6 @@ public class BaseShowEntity {
         this.genre = genre;
     }
 
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
     public String getName() {
         return name;
     }
@@ -136,7 +126,6 @@ public class BaseShowEntity {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public int getProductionYear() {
         return productionYear;
@@ -146,18 +135,11 @@ public class BaseShowEntity {
         this.productionYear = productionYear;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BaseShowEntity that = (BaseShowEntity) o;
-        return productionYear == that.productionYear &&
-                id.equals(that.id) &&
-                name.equals(that.name);
+    public Integer getSeasons() {
+        return seasons;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, productionYear);
+    public void setSeasons(Integer seasons) {
+        this.seasons = seasons;
     }
 }
