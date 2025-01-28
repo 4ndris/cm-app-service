@@ -42,26 +42,25 @@ public class ShowService {
         showRepository.save(showDocument);
     }
 
-    public Show getShow(String id) {
-        ShowDocument showDocument = showRepository.findById(id)
-                .orElseThrow(() -> new ShowNotFoundException(id));
+    public Show getShow(String imdbId) {
+        ShowDocument showDocument = showRepository.findShowDocumentByImdbId(imdbId)
+                .orElseThrow(() -> new ShowNotFoundException(imdbId));
         return showMapper.documentToShow(showDocument);
     }
 
-    public Show updateShow(String id, Show show) {
-        ShowDocument existingShow = showRepository.findById(id)
-                .orElseThrow(() -> new ShowNotFoundException(id));
+    public Show updateShow(String imdbId, Show show) {
+        ShowDocument existingShow = showRepository.findShowDocumentByImdbId(imdbId)
+                .orElseThrow(() -> new ShowNotFoundException(imdbId));
 
-        ShowDocument updatedDocument = showMapper.showToDocument(show);
-        updatedDocument.setShowId(existingShow.getShowId()); // Preserve the original ID
+        showMapper.showToDocument(show, existingShow);
 
-        showRepository.save(updatedDocument);
-        return showMapper.documentToShow(updatedDocument);
+        showRepository.save(existingShow);
+        return showMapper.documentToShow(existingShow);
     }
 
-    public void deleteShow(String id) {
-        ShowDocument showDocument = showRepository.findById(id)
-                .orElseThrow(() -> new ShowNotFoundException(id));
+    public void deleteShow(String imdbId) {
+        ShowDocument showDocument = showRepository.findShowDocumentByImdbId(imdbId)
+                .orElseThrow(() -> new ShowNotFoundException(imdbId));
         showRepository.delete(showDocument);
     }
 }

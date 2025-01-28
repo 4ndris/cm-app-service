@@ -204,11 +204,10 @@ components:
     Shows:
       type: object
       properties:
-        Items:
+        items:
           type: array
           items:
             $ref: '#/components/schemas/Show'
-
   responses:
     ShowNotFound:
       description: |

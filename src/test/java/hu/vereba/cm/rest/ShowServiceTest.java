@@ -43,7 +43,7 @@ class ShowServiceTest {
                 .andDo(print())
                 //THEN
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.Items", is(not(emptyArray()))));
+                .andExpect(jsonPath("$.items", is(not(emptyArray()))));
     }
 
     @Test

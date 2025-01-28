@@ -8,12 +8,18 @@ import org.mapstruct.*;
 public interface ShowMapper {
 
     @Mapping(source = "category", target = "category", qualifiedByName = "stringToCategory")
-    @Mapping(source = "showId", target = "id")
+    @Mapping(source = "imdbId", target = "id")
     Show documentToShow(ShowDocument document);
 
     @Mapping(source = "category", target = "category", qualifiedByName = "categoryToString")
-    @Mapping(source = "id", target = "showId")
+    @Mapping(source = "id", target = "imdbId")
+    @Mapping(target = "id", ignore = true)
     ShowDocument showToDocument(Show show);
+
+    @Mapping(source = "category", target = "category", qualifiedByName = "categoryToString")
+    @Mapping(source = "id", target = "imdbId")
+    @Mapping(target = "id", ignore = true)
+    ShowDocument showToDocument(Show show, @MappingTarget ShowDocument document);
 
     // Custom mapping for the category field
     @Named("stringToCategory")

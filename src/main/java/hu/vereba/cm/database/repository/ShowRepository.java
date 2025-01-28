@@ -18,6 +18,9 @@ public interface ShowRepository extends MongoRepository<ShowDocument, String> {
     @Nonnull
     Optional<ShowDocument> findById(@Nonnull String id);
 
+    @Nonnull
+    Optional<ShowDocument> findShowDocumentByImdbId(String imdbId);
+
     // Add custom query methods if needed
     List<ShowDocument> findByCategory(String category); // Example: Find shows by category (MOVIE or SERIES)
 }

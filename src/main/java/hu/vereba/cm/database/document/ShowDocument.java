@@ -20,7 +20,7 @@ public class ShowDocument {
 
     @Id
     @EqualsAndHashCode.Include
-    private String showId;
+    private String id;
 
     private String abstractDesc;
     private int ageRating;
@@ -31,6 +31,7 @@ public class ShowDocument {
     private String director;
     private String editedAbstract;
     private String genre;
+    private String imdbId;
     private String name;
     private int productionYear;
 
@@ -38,13 +39,12 @@ public class ShowDocument {
     private Integer seasons;
 
     //Getters-Setters
-
-    public String getShowId() {
-        return showId;
+    public String getId() {
+        return id;
     }
 
-    public void setShowId(String showId) {
-        this.showId = showId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAbstractDesc() {
@@ -117,6 +117,14 @@ public class ShowDocument {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
     }
 
     public String getName() {
